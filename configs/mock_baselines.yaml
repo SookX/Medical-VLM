@@ -1,0 +1,28 @@
+experiment:
+  name: mock_baselines
+  output_dir: outputs/mock_baselines_config
+
+data:
+  source_dataset: nih_cxr14
+  row_index: 0
+  count: 2
+
+controller:
+  max_attempts_per_stage: 3
+  candidates_per_stage: 3
+
+tasks:
+  - cardiomegaly
+  - mediastinal_widening
+  - rotation
+
+modes:
+  - stage3
+  - stage4
+
+systems:
+  - one_pass
+  - self_consistency
+  - local_repair
+  - full_restart
+

@@ -150,6 +150,7 @@ activemq-data/
 # Environments
 .env
 .envrc
+.env.local
 .venv
 env/
 venv/
@@ -205,6 +206,15 @@ tempCodeRunnerFile.py
 
 # Ruff stuff:
 .ruff_cache/
+
+# Local benchmark/data checkouts.
+# CheXStruct is cloned from Hugging Face and should not be committed.
+data/
+
+# Model and experiment artifacts.
+models/
+outputs/
+result/
 
 # PyPI configuration file
 .pypirc

@@ -1,0 +1,12 @@
+controller:
+  max_attempts_per_stage: 3
+
+paths:
+  cxreasonbench_repo: external/CXReasonBench
+  chexstruct_root: data/CheXStruct
+  output_dir: outputs
+
+verification:
+  arithmetic_tolerance: 0.01
+  use_dependency_audit: true
+

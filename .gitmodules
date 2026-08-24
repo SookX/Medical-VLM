@@ -1,0 +1,3 @@
+[submodule "external/CXReasonBench"]
+	path = external/CXReasonBench
+	url = https://github.com/ttumyche/CXReasonBench

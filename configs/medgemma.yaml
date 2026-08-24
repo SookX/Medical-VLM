@@ -1,0 +1,16 @@
+extends: configs/default.yaml
+
+model:
+  provider: transformers
+  model_id: google/medgemma-4b-it
+  task: image-text-to-text
+  torch_dtype: bfloat16
+  device: cuda
+  max_new_tokens: 512
+  temperature: 0.0
+
+prompting:
+  system_prompt: >
+    You are a medical imaging reasoning assistant for research evaluation.
+    Follow the requested CXReasonBench stage format exactly.
+
