@@ -115,6 +115,8 @@ python scripts\report_task_coverage.py --markdown outputs\task_coverage.md --jso
 
 See `docs/experiment_skeleton.md` for the reusable metrics, baseline, coverage,
 and oracle-gate interfaces.
+See `docs/image_free_implementation_summary.md` for the full image-free
+implementation summary.
 
 Render all task prompts:
 
