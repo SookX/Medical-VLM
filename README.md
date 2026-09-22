@@ -3,6 +3,10 @@
 Training-free stage-gated diagnostic reasoning experiments for CXReasonBench
 Path 1.
 
+For the consolidated implementation status, experimental results, accepted and
+rejected components, reproduction commands, and remaining work, see
+[`PROJECT_STATUS_SUMMARY.md`](PROJECT_STATUS_SUMMARY.md).
+
 ## Current Runnable Slice
 
 The repository can run a mock cardiomegaly Path-1 pipeline without the restricted
@@ -75,6 +79,12 @@ Run any registered task through the CheXStruct mock pipeline:
 python scripts\run_mock_task_pipeline.py --task rotation --row-index 0
 ```
 
+Run one full, narrated image-free pipeline example:
+
+```powershell
+python scripts\run_full_pipeline_example.py --task cardiomegaly --row-index 1 --mode stage3
+```
+
 See `docs/task_router.md` for the Stage 2 schemas.
 See `docs/clinical_rules.md` for the current deterministic Stage 4 rules.
 
@@ -118,6 +128,26 @@ and oracle-gate interfaces.
 See `docs/image_free_implementation_summary.md` for the full image-free
 implementation summary.
 
+## Selective Path-1 consensus pipeline
+
+The repository includes native CXReasonBench Path-1 loading, MedGemma execution,
+stage-local repair, deterministic measurement geometry, confidence consensus,
+and the original-metric layout adapter. The frozen three-measurement development
+configuration is `configs/path1_three_measurement_consensus_v1.json`.
+
+Run the focused validation with:
+
+```powershell
+python scripts\audit_path1_measurement_consensus_v2.py --task aortic_knob_enlargement --version v3
+python scripts\audit_path1_measurement_consensus_v2.py --task carina_angle --version v2
+python scripts\audit_path1_measurement_consensus_v2.py --task descending_aorta_enlargement --version v3
+python scripts\verify_path1_three_measurement_consensus_v1.py
+```
+
+The benchmark and model artifacts are intentionally not committed. See
+`docs/path1_12_task_completion_program.md` and `docs/PATH1_APPENDIX.md` for the
+claim boundary, ablations, and required local artifact layout.
+
 Render all task prompts:
 
 ```powershell
@@ -129,3 +159,102 @@ Run mock oracle local repair:
 ```powershell
 python scripts\run_mock_oracle_eval.py --tasks cardiomegaly --count 2 --output-dir outputs\mock_oracle_smoke
 ```
+
+## Path 1 study records
+
+The current implementation/ablation checklist is in
+`PATH1_IMPLEMENTATION_AND_ABLATION_PLAN.md`. The living paper appendix,
+including calibration cohorts, locked policies, negative results, compute
+controls, artifact locations, and the final appendix checklist, is in
+`docs/PATH1_APPENDIX.md`.
+
+The projection upstream calibration, transfer audit, and cumulative ablation
+can be reproduced with:
+
+```powershell
+python scripts\calibrate_path1_projection_bodypart.py
+python scripts\audit_path1_projection_upstream_verifiers.py
+python scripts\run_path1_projection_cumulative_ablation.py
+python scripts\run_path1_projection_repair_policy_ablation.py
+python scripts\run_path1_projection_selected_policy.py
+python scripts\run_path1_projection_stage2_repair_policy.py
+python scripts\run_path1_projection_stage2_strict_confirmation.py
+python scripts\run_path1_projection_full_restart_control.py
+python scripts\verify_path1_projection_full_restart_control.py
+python scripts\verify_path1_projection_frozen_config.py
+python scripts\run_path1_inclusion_unified.py
+python scripts\verify_path1_inclusion_unified.py
+python scripts\run_path1_inclusion_full_restart_control.py
+python scripts\verify_path1_inclusion_full_restart_control.py
+python scripts\verify_path1_inclusion_frozen_config.py
+python scripts\prepare_path1_cardiomegaly_stage2_calibration.py
+python scripts\calibrate_path1_cardiomegaly_stage2.py
+python scripts\audit_path1_locked_independent_cardiomegaly_stage2.py
+python scripts\verify_path1_cardiomegaly_stage2.py
+python scripts\prepare_path1_mediastinal_stage2_calibration.py
+python scripts\calibrate_path1_mediastinal_stage2.py
+python scripts\audit_path1_locked_independent_mediastinal_stage2.py
+python scripts\verify_path1_mediastinal_stage2.py
+python scripts\audit_path1_task_support.py
+python scripts\verify_path1_task_support.py
+python scripts\verify_path1_remaining_stage2.py
+python scripts\verify_path1_inclusion_unified_b1.py
+python scripts\verify_path1_inclusion_unified_b2.py
+python scripts\verify_path1_projection_b1.py
+python scripts\verify_path1_projection_b2.py
+python scripts\verify_path1_end_to_end_readiness.py
+python scripts\evaluate_path1_official_metrics.py
+```
+
+See `docs/path1_projection_upstream_pipeline.md` for the locked thresholds,
+zero-false-repair Stage-1/1.5/2 transfer audit, full 100-case cumulative run,
+retry-policy and call-matched blind ablation, selected-policy end-to-end
+confirmation, the Stage-2 prompt/retry pilot, and remaining projection work.
+The strict Stage-2 end-to-end confirmation is also included; it advances one
+additional case to Stage 3 without regressing any trajectory.
+The 144-call full-chain restart control and permanent artifact verifier test
+whether an equal explicit-call budget explains the selected local-repair gain.
+The final projection v1 prompts, thresholds, budgets, code hashes, artifacts,
+compute rules, and environment are frozen in
+`configs/path1_projection_frozen_v1.json`; see
+`docs/path1_projection_frozen_configuration.md`.
+The frozen inclusion v1 policy improves Completion from 10% to 16% and mean
+Depth from 0.85 to 1.01 over all 100 inclusion cases, with seven paired depth
+wins and no losses. Its 38-call full-restart control reaches 11% Completion
+and 0.87 mean Depth. The configuration and claim boundary are documented in
+`docs/path1_inclusion_frozen_configuration.md`.
+Its unified 38-call blind-local-retry control remains at 10% Completion and
+0.85 mean Depth, while frozen B4 reaches 16% and 1.01 with no depth loss. See
+`docs/path1_inclusion_unified_b1.md`.
+Its sampled 38-call, stage-allocation-matched B2 control falls to 9%
+Completion and 0.81 mean Depth despite using only 27 more generated tokens
+than B4. See `docs/path1_inclusion_unified_b2.md`.
+Projection's 144-call blind B1 remains at mean Depth 0.00 and sampled B2
+reaches 0.01, while frozen routed B4 reaches 0.13. See
+`docs/path1_projection_compute_controls.md`.
+The all-task support gate is in `configs/path1_task_support_v5.json`; its
+expanded 60-cell audit and final-run blockers are documented in
+`docs/path1_task_support_matrix.md`.
+The original-metric adapter now evaluates frozen task replacements in the
+native CXReasonBench layout over all 1,200 cases. The current Inclusion plus
+Projection overlay improves local-baseline Completion from 1.73 to 2.17,
+Depth from 0.36 to 0.38, and Alignment from 43.53 to 48.78. See
+`docs/path1_official_metric_adapter.md`; unsupported tasks remain native
+baseline pass-throughs, so this is not yet the final all-task result.
+The first Cardiomegaly Stage-2 candidate is retained as a negative result: it
+passed external validation with zero wrong conclusive mappings but caused
+16/166 false repairs in the locked benchmark transfer audit. No MedGemma
+repair run was allowed. See `docs/path1_cardiomegaly_stage2_verifier.md`.
+The first Mediastinal Widening Stage-2 candidate is also retained as a
+negative result. It passed external validation with zero wrong conclusive
+mappings but produced 3/166 false repairs after locked transfer, so no
+MedGemma repair run was allowed. See
+`docs/path1_mediastinal_stage2_verifier.md`.
+The remaining eight Stage-2 candidates are now closed: two failed external
+validation, three failed locked benchmark transfer, and three safely routed 20
+MedGemma retries but corrected 0/20. All are rejected and pass through natively.
+See `docs/path1_remaining_stage2_verifiers.md`.
+The frozen 1,200-case supported-task overlay now has a hash-locked preflight
+covering all baseline cases, both replacement cohorts, and all six B1/B2/B3
+control verifications. See `docs/path1_supported_final_run.md` for the single
+copy-paste final command. Ten tasks remain native pass-throughs.

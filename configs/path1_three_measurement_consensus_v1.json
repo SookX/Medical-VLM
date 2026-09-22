@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "configuration_id": "path1_three_measurement_consensus_v1",
+  "status": "frozen_development_candidate",
+  "tasks": {
+    "aortic_knob_enlargement": {
+      "stage2": "frozen_active",
+      "stage3": "frozen_active_consensus_v3",
+      "stage4": "frozen_active_interval_stable",
+      "completion": 5,
+      "completion_gains": 5,
+      "completion_losses": 0
+    },
+    "carina_angle": {
+      "stage2": "frozen_active",
+      "stage3": "validated_inactive_consensus_v2",
+      "stage4": "abstain_when_interval_ambiguous",
+      "completion": 8,
+      "completion_gains": 0,
+      "completion_losses": 0
+    },
+    "descending_aorta_enlargement": {
+      "stage2": "frozen_active",
+      "stage3": "frozen_active_consensus_v3",
+      "stage4": "frozen_active_interval_stable",
+      "completion": 23,
+      "completion_gains": 22,
+      "completion_losses": 0
+    }
+  },
+  "official_diagnostic": {
+    "cases": 1200,
+    "completion": 16.75,
+    "completion_refined": 14.0,
+    "alignment": 42.13,
+    "release_result": false
+  },
+  "locks": {
+    "cxreason/path1/measurement_geometry.py": "6a68e6650b699f7178fed446c164eae63dcb0e51f315a979ff503cd3da507988",
+    "scripts/audit_path1_measurement_consensus_v2.py": "ce7e608b94fa79c67195bd8330ef2ce9d2ae5b0407930fb7a5d217b3501b8079",
+    "scripts/run_path1_measurement_geometry_v1_ablation.py": "750109d247ffc71f12f39e60e25c7ce3be2d77047c5b55b0a7fdc8d745d868b7",
+    "outputs/path1_aortic_knob_enlargement_stage3_consensus_v3_transfer_audit/summary.json": "4c3c6230269c48a0acae44102983f2778bc01327a213ae70cdf15161dea379de",
+    "outputs/path1_carina_angle_stage3_consensus_v2_transfer_audit/summary.json": "908e9af3d039d4417dff2f286ef419064f49daf31cad945f503fc464ca160399",
+    "outputs/path1_descending_aorta_enlargement_stage3_consensus_v3_transfer_audit/summary.json": "85b9646b55a4e8956e05185c9d3cfa4e0e8bd2ea0016e53a732162cda4dbabb0",
+    "outputs/path1_aortic_knob_enlargement_measurement_consensus_v3_ablation/summary.json": "988be5342ffa5bfdd6f7aff2d32cddc7f497ca4bd63750aa321d8abfde8c14ee",
+    "outputs/path1_carina_angle_measurement_consensus_v2_ablation/summary.json": "ed3e572913418b303ee285bf7f86c002262fd5872b3d30a47b457267d84f47f6",
+    "outputs/path1_descending_aorta_enlargement_measurement_consensus_v3_ablation/summary.json": "379ca9c7f4e3bd834a2846eda54318f19df89e69376f56ae0a32341cd3ab4047",
+    "outputs/path1_final_candidate_v9_consensus_diagnostic_official/metrics.json": "f06bee43890f8039b43acad761b53d126e7fdfa23fe735200167bc1b348395d0"
+  },
+  "claim_boundary": "Frozen development candidate. Consensus is label-blind, but its transfer cohort has been repeatedly inspected; independent confirmation is required. Carina is safe but inactive because its conclusive cases do not intersect failed downstream trajectories."
+}

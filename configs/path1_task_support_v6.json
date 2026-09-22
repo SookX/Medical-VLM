@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "configuration_id": "path1_task_support_v6",
+  "status": "active_support_gate",
+  "task_order": [
+    "aortic_knob_enlargement",
+    "ascending_aorta_enlargement",
+    "cardiomegaly",
+    "carina_angle",
+    "descending_aorta_enlargement",
+    "descending_aorta_tortuous",
+    "inclusion",
+    "inspiration",
+    "mediastinal_widening",
+    "projection",
+    "rotation",
+    "trachea_deviation"
+  ],
+  "stage_order": ["stage1", "stage1.5", "stage2", "stage3", "stage4"],
+  "unsupported_action": "pass_through_native_answer_without_verifier_or_retry",
+  "stage_defaults": {
+    "stage1": {"support_level": "unsupported", "repair_enabled": false, "verifier": null, "evidence": null},
+    "stage1.5": {"support_level": "unsupported", "repair_enabled": false, "verifier": null, "evidence": null},
+    "stage2": {"support_level": "unsupported", "repair_enabled": false, "verifier": null, "evidence": null},
+    "stage3": {"support_level": "unsupported", "repair_enabled": false, "verifier": null, "evidence": null},
+    "stage4": {"support_level": "validated_engineering", "repair_enabled": true, "verifier": "PracticalFinalConsistencyVerifier", "evidence": "docs/path1_practical_final_verifier.md"}
+  },
+  "tasks": {
+    "aortic_knob_enlargement": {
+      "matrix_status": "stage2_rejected_stage4_only",
+      "overrides": {
+        "stage2": {"support_level": "rejected", "repair_enabled": false, "verifier": "IndependentSelectiveAnatomyVerifier", "evidence": "docs/path1_remaining_stage2_verifiers.md"}
+      }
+    },
+    "ascending_aorta_enlargement": {
+      "matrix_status": "stage2_rejected_stage4_only",
+      "overrides": {
+        "stage2": {"support_level": "rejected", "repair_enabled": false, "verifier": "IndependentSelectiveAnatomyVerifier", "evidence": "docs/path1_remaining_stage2_verifiers.md"}
+      }
+    },
+    "cardiomegaly": {
+      "matrix_status": "stage2_stage3_rejected_stage4_only",
+      "overrides": {
+        "stage2": {"support_level": "rejected", "repair_enabled": false, "verifier": "IndependentCardiomegalyBodypartVerifier", "evidence": "docs/path1_cardiomegaly_stage2_verifier.md"},
+        "stage3": {"support_level": "rejected", "repair_enabled": false, "verifier": "IndependentCardiothoracicMeasurementVerifier", "evidence": "docs/path1_additional_independent_stage3_verifiers.md"}
+      }
+    },
+    "carina_angle": {
+      "matrix_status": "frozen_full_path",
+      "freeze_id": "path1_carina_selector_frozen_v2",
+      "overrides": {
+        "stage2": {"support_level": "frozen", "repair_enabled": true, "verifier": "IndependentSelectiveAnatomyVerifier", "evidence": "docs/path1_safe_stage2_selector_b5.md"},
+        "stage4": {"support_level": "unsupported", "repair_enabled": false, "verifier": null, "evidence": null}
+      }
+    },
+    "descending_aorta_enlargement": {
+      "matrix_status": "stage2_rejected_stage4_only",
+      "overrides": {
+        "stage2": {"support_level": "rejected", "repair_enabled": false, "verifier": "IndependentSelectiveAnatomyVerifier", "evidence": "docs/path1_remaining_stage2_verifiers.md"}
+      }
+    },
+    "descending_aorta_tortuous": {
+      "matrix_status": "stage2_rejected_stage4_only",
+      "overrides": {
+        "stage2": {"support_level": "rejected", "repair_enabled": false, "verifier": "IndependentSelectiveAnatomyVerifier", "evidence": "docs/path1_remaining_stage2_verifiers.md"}
+      }
+    },
+    "inclusion": {
+      "matrix_status": "frozen_full_path",
+      "freeze_id": "path1_inclusion_frozen_v1",
+      "overrides": {
+        "stage2": {"support_level": "frozen", "repair_enabled": true, "verifier": "IndependentInclusionBodypartVerifier", "evidence": "docs/path1_inclusion_frozen_configuration.md"},
+        "stage3": {"support_level": "frozen", "repair_enabled": true, "verifier": "IndependentInclusionMeasurementVerifier", "evidence": "docs/path1_inclusion_frozen_configuration.md"},
+        "stage4": {"support_level": "frozen", "repair_enabled": true, "verifier": "PracticalFinalConsistencyVerifier", "evidence": "docs/path1_inclusion_frozen_configuration.md"}
+      }
+    },
+    "inspiration": {
+      "matrix_status": "stage2_rejected_stage4_only",
+      "overrides": {
+        "stage2": {"support_level": "rejected", "repair_enabled": false, "verifier": "IndependentSelectiveAnatomyVerifier", "evidence": "docs/path1_remaining_stage2_verifiers.md"}
+      }
+    },
+    "mediastinal_widening": {
+      "matrix_status": "stage2_rejected_stage4_only",
+      "overrides": {
+        "stage2": {"support_level": "rejected", "repair_enabled": false, "verifier": "IndependentMediastinalBodypartVerifier", "evidence": "docs/path1_mediastinal_stage2_verifier.md"}
+      }
+    },
+    "projection": {
+      "matrix_status": "frozen_full_path",
+      "freeze_id": "path1_projection_frozen_v1",
+      "overrides": {
+        "stage1": {"support_level": "frozen", "repair_enabled": true, "verifier": "ProjectionCriterionVerifier", "evidence": "docs/path1_projection_frozen_configuration.md"},
+        "stage1.5": {"support_level": "frozen", "repair_enabled": true, "verifier": "RefinedCriterionApplicabilityVerifier", "evidence": "docs/path1_projection_frozen_configuration.md"},
+        "stage2": {"support_level": "frozen", "repair_enabled": true, "verifier": "IndependentProjectionBodypartVerifier", "evidence": "docs/path1_projection_frozen_configuration.md"},
+        "stage3": {"support_level": "frozen", "repair_enabled": true, "verifier": "IndependentProjectionMeasurementVerifier", "evidence": "docs/path1_projection_frozen_configuration.md"},
+        "stage4": {"support_level": "frozen", "repair_enabled": true, "verifier": "PracticalFinalConsistencyVerifier", "evidence": "docs/path1_projection_frozen_configuration.md"}
+      }
+    },
+    "rotation": {
+      "matrix_status": "stage2_rejected_stage4_only",
+      "overrides": {
+        "stage2": {"support_level": "rejected", "repair_enabled": false, "verifier": "IndependentSelectiveAnatomyVerifier", "evidence": "docs/path1_remaining_stage2_verifiers.md"}
+      }
+    },
+    "trachea_deviation": {
+      "matrix_status": "stage2_rejected_stage4_only",
+      "overrides": {
+        "stage2": {"support_level": "rejected", "repair_enabled": false, "verifier": "IndependentSelectiveAnatomyVerifier", "evidence": "docs/path1_remaining_stage2_verifiers.md"}
+      }
+    }
+  },
+  "run_gates": {
+    "diagnostic_all_1200_allowed": true,
+    "final_all_1200_allowed": false,
+    "final_ready_tasks": ["carina_angle", "inclusion", "projection"],
+    "blocking_reasons": [
+      "nine tasks retain rejected Stage-2 repair policies",
+      "the system is a three-task supported overlay, not an all-task intervention",
+      "paper-versus-local baseline metric differences remain unresolved"
+    ]
+  },
+  "change_control": {
+    "unsupported_or_rejected_stage_repair_must_raise": true,
+    "new_support_requires": [
+      "independent calibration or protocol-semantic proof",
+      "locked transfer audit",
+      "frozen reached-stage repair experiment",
+      "damage and mechanism control",
+      "versioned task-support configuration"
+    ]
+  }
+}

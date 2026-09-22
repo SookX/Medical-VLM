@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "configuration_id": "path1_task_stage_program_v1",
+  "status": "active_preflight_contract",
+  "candidate": "outputs/path1_final_candidate_v4",
+  "stage_order": ["stage1", "stage1.5", "stage2", "stage3", "stage4"],
+  "status_vocabulary": {
+    "frozen_active": "validated component is exercised by the current final candidate",
+    "validated_inactive": "component passed its own audit but is not exercised by a compatible current trajectory",
+    "rejected": "candidate failed an external, transfer, or efficacy gate",
+    "unsupported": "no independently validated component exists",
+    "not_applicable": "the task dialogue has no such turn"
+  },
+  "shared": {
+    "stage1": {"status": "frozen_active", "evidence": "outputs/path1_selective_protocol_stage1_all_tasks/verification.json"},
+    "stage1.5_evidence": "outputs/path1_protocol_criteria_audit/summary.json",
+    "stage4_engineering_evidence": "outputs/path1_practical_final_verifier_audit/summary.json"
+  },
+  "tasks": {
+    "aortic_knob_enlargement": {
+      "stage1.5": "frozen_active", "stage2": "rejected", "stage3": "unsupported", "stage4": "validated_inactive",
+      "stage2_target": "aortic knob and tracheal borders", "stage3_target": "knob width / tracheal width", "completion": 0
+    },
+    "ascending_aorta_enlargement": {
+      "stage1.5": "frozen_active", "stage2": "validated_inactive", "stage3": "validated_inactive", "stage4": "validated_inactive",
+      "stage2_target": "heart-trachea reference geometry and ascending aorta", "stage3_target": "area ratio", "completion": 0, "candidate_completion": 98
+    },
+    "cardiomegaly": {
+      "stage1.5": "not_applicable", "stage2": "frozen_active", "stage3": "validated_inactive", "stage4": "validated_inactive",
+      "stage2_target": "heart and thoracic borders", "stage3_target": "cardiothoracic ratio", "completion": 3, "candidate_completion": 6
+    },
+    "carina_angle": {
+      "stage1.5": "not_applicable", "stage2": "frozen_active", "stage3": "rejected", "stage4": "validated_inactive",
+      "stage2_target": "three carina landmarks", "stage3_target": "carina angle", "completion": 8
+    },
+    "descending_aorta_enlargement": {
+      "stage1.5": "frozen_active", "stage2": "validated_inactive", "stage3": "rejected", "stage4": "validated_inactive",
+      "stage2_target": "descending-aorta and tracheal borders", "stage3_target": "width ratio", "completion": 1
+    },
+    "descending_aorta_tortuous": {
+      "stage1.5": "frozen_active", "stage2": "validated_inactive", "stage3": "rejected", "stage4": "validated_inactive",
+      "stage2_target": "six descending-aorta points", "stage3_target": "curvature", "completion": 1
+    },
+    "inclusion": {
+      "stage1.5": "not_applicable", "stage2": "frozen_active", "stage3": "frozen_active", "stage4": "frozen_active",
+      "stage2_target": "bilateral apex, lateral, and base landmarks", "stage3_target": "six regional inclusion labels and ratios", "completion": 16
+    },
+    "inspiration": {
+      "stage1.5": "frozen_active", "stage2": "frozen_active", "stage3": "validated_inactive", "stage4": "frozen_active",
+      "stage2_target": "ribs, right hemidiaphragm, and mid-clavicular line", "stage3_target": "right posterior rib count", "completion": 12, "candidate_completion": 13
+    },
+    "mediastinal_widening": {
+      "stage1.5": "frozen_active", "stage2": "validated_inactive", "stage3": "rejected", "stage4": "validated_inactive",
+      "stage2_target": "mediastinal and task-level thoracic borders", "stage3_target": "mediastinal/chest ratio", "completion": 0
+    },
+    "projection": {
+      "stage1.5": "frozen_active", "stage2": "frozen_active", "stage3": "frozen_active", "stage4": "frozen_active",
+      "stage2_target": "bilateral scapular and lung regions", "stage3_target": "bilateral overlap ratios", "completion": 26
+    },
+    "rotation": {
+      "stage1.5": "not_applicable", "stage2": "validated_inactive", "stage3": "validated_inactive", "stage4": "validated_inactive",
+      "stage2_target": "medial clavicle ends and midline", "stage3_target": "distance symmetry ratio", "completion": 1, "candidate_completion": 5
+    },
+    "trachea_deviation": {
+      "stage1.5": "not_applicable", "stage2": "validated_inactive", "stage3": "rejected", "stage4": "validated_inactive",
+      "stage2_target": "nine tracheal points and thoracic midline", "stage3_target": "deviation direction", "completion": 0
+    }
+  },
+  "evidence": {
+    "final_candidate": "outputs/path1_final_candidate_v4/verification.json",
+    "stage1": "outputs/path1_selective_protocol_stage1_all_tasks/verification.json",
+    "stage1_semantics": "outputs/path1_protocol_criteria_audit/summary.json",
+    "inclusion": "outputs/path1_inclusion_unified/verification.json",
+    "inspiration": "outputs/path1_inspiration_selective_combined_freeze/verification.json",
+    "inspiration_stage3_rejection": "outputs/path1_inspiration_rib_count_transfer_audit/summary.json",
+    "carina": "outputs/path1_carina_selector_frozen_v2/verification.json",
+    "projection": "outputs/path1_projection_selective_combined_freeze/verification.json",
+    "cardiomegaly_stage2": "outputs/path1_cardiomegaly_stage2_v5_ablation/verification.json",
+    "cardiomegaly_stage3_candidate": "outputs/path1_cardiomegaly_stage3_v5_ablation/summary.json",
+    "carina_stage3_rejection": "outputs/path1_carina_angle_v2_calibration/summary.json",
+    "carina_stage3_v4_rejection": "outputs/path1_carina_angle_ensemble_v4_test/summary.json",
+    "carina_stage3_v5_confirmation_rejection": "outputs/path1_carina_angle_robust_v5_confirmation/summary.json",
+    "inspiration_stage3_candidate": "outputs/path1_inspiration_rib_count_rf_v2_ablation/summary.json",
+    "aortic_knob_stage2_candidate": "outputs/path1_aortic_knob_stage2_v5_transfer_audit/summary.json",
+    "aortic_knob_stage3_futility": "outputs/path1_aortic_knob_measurement_probe_v6/summary.json",
+    "ascending_aorta_candidate": "outputs/path1_ascending_aorta_v8_ablation/summary.json",
+    "descending_aorta_stage2_candidate": "outputs/path1_descending_aorta_stage2_v2_transfer_audit/summary.json",
+    "descending_aorta_stage3_rejection": "outputs/path1_descending_aorta_stage3_ratio_v3_transfer_audit/summary.json",
+    "mediastinal_stage2_candidate": "outputs/path1_mediastinal_stage2_consensus_v2_transfer_audit/summary.json",
+    "rotation_stage2_candidate": "outputs/path1_rotation_stage2_shape_v1_transfer_audit/summary.json",
+    "rotation_stage3_rejection": "outputs/path1_rotation_stage3_geometry_v2_transfer_audit/summary.json",
+    "rotation_stage3_candidate": "outputs/path1_rotation_v4_ablation/summary.json",
+    "descending_aorta_tortuous_stage2_candidate": "outputs/path1_descending_aorta_tortuous_stage2_shape_v1_transfer_audit/summary.json",
+    "trachea_deviation_stage2_candidate": "outputs/path1_trachea_deviation_stage2_consensus_v3_transfer_audit/summary.json",
+    "trachea_deviation_stage3_rejection": "outputs/path1_trachea_direction_rf_v4_calibration/summary.json",
+    "remaining_stage2": "outputs/path1_remaining_stage2_verification/summary.json",
+    "final_rules": "outputs/path1_practical_final_verifier_audit/summary.json"
+  },
+  "release_gates": {
+    "diagnostic_full_run_allowed": true,
+    "claim_all_tasks_genuinely_supported": false,
+    "required_frozen_active_cells": ["stage1", "stage2", "stage3", "stage4"],
+    "allow_case_level_abstention": true,
+    "allow_unsupported_cell_in_all_task_release": false
+  }
+}

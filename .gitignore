@@ -209,7 +209,9 @@ tempCodeRunnerFile.py
 
 # Local benchmark/data checkouts.
 # CheXStruct is cloned from Hugging Face and should not be committed.
-data/
+/data/
+/physionet.org/
+/external/cardiothoracic_ratio_estimation_dataset/
 
 # Model and experiment artifacts.
 models/
