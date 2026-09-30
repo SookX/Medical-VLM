@@ -1,0 +1,69 @@
+import os
+import csv
+import zipfile
+import pydicom
+from PIL import Image
+import numpy as np
+
+IMG_DIR = "train/"
+OUT_DIR = "vindr_processed_pngs"
+META_FILE = "train.csv"
+COMPETITION = "vinbigdata-chest-xray-abnormalities-detection"
+
+def get_data():
+    if not os.path.exists(META_FILE) or not os.path.exists(IMG_DIR):
+        print("Pulling dataset from Kaggle")
+        os.system(f"kaggle competitions download -c {COMPETITION}")
+        
+        zip_file = f"{COMPETITION}.zip"
+        if os.path.exists(zip_file):
+            print("Unzipping files.")
+            with zipfile.ZipFile(zip_file, 'r') as z:
+                z.extractall(".")
+            print("Done.")
+    else:
+        print("Files already here")
+
+def dcm_to_png(src, dest):
+    ds = pydicom.dcmread(src)
+    pixels = ds.pixel_array.astype(float)
+    
+    p_max = pixels.max()
+    if p_max > 0:
+        pixels = (np.maximum(pixels, 0) / p_max) * 255.0
+        
+    img = Image.fromarray(np.uint8(pixels))
+    img.save(dest)
+
+def main():
+    get_data()
+    os.makedirs(OUT_DIR, exist_ok=True)
+    
+    f = open(META_FILE, "r")
+    reader = csv.DictReader(f)
+    
+    image_ids = []
+    seen = set()
+    for row in reader:
+        img_id = row.get("image_id")
+        if img_id and img_id not in seen:
+            seen.add(img_id)
+            image_ids.append(img_id)
+    f.close()
+    
+    count = 0
+    for img_id in image_ids[:100]:
+        dcm_path = os.path.join(IMG_DIR, f"{img_id}.dicom")
+        if not os.path.exists(dcm_path):
+            dcm_path = os.path.join(IMG_DIR, f"{img_id}.dcm")
+            
+        png_path = os.path.join(OUT_DIR, f"{img_id}.png")
+        
+        if os.path.exists(dcm_path) and not os.path.exists(png_path):
+            dcm_to_png(dcm_path, png_path)
+            count = count + 1
+
+    print(f" Converted {count} images.")
+
+if __name__ == "__main__":
+    main()
